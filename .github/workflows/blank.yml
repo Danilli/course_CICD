@@ -23,32 +23,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt  
 
-    - name: Run tests
+    - name: Run tests from my_tests.py
       run: |
-        python my_tests.py
-
+        python my_tests.py  
 
     - name: Check test results
       id: test-results
       run: |
-        if python -m pytest; then
-          echo "::set-output name=status::success"
+        if python my_tests.py; then
+          echo "status=success" >> $GITHUB_OUTPUT
         else
-          echo "::set-output name=status::failure"
+          echo "status=failure" >> $GITHUB_OUTPUT
           echo "::error::Tests failed, please check the logs."
           exit 1
         fi
 
     - name: Approve on success
-      if: steps.test-results.outputs.status == 'success'
+      if: ${{ steps.test-results.outputs.status == 'success' }}
       run: |
         echo "Tests passed. Approving the changes."
-        
 
     - name: Reject on failure
-      if: steps.test-results.outputs.status == 'failure'
+      if: ${{ steps.test-results.outputs.status == 'failure' }}
       run: |
         echo "Tests failed. Rejecting the changes."
-        
-
-
