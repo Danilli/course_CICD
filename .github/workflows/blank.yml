@@ -10,7 +10,6 @@ jobs: #Начало секции джобов
         run: echo "Hello world!" #Команда, которая будет выполнена в терминале
 
   print_full_technical_info: #Начало секции второй джобы
-       needs: print_hello  
     runs-on: ubuntu-latest #Среда выполнения джоба
     steps: #Начало секции шагов
       - name: Print full_tech_info #Название шага
