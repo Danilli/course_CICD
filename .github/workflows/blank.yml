@@ -25,7 +25,7 @@ jobs:
 
     - name: Run tests
       run: |
-        python -m pytest  # Замените на команду для запуска тестов в вашем проекте
+        python my_tests.py
 
 
     - name: Check test results
